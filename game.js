@@ -5,6 +5,14 @@ var currentPlayer = 1; //player 1 is currently playing.
 var ADD = 0;
 var SUB = 1;
 var MUL = 2;
+
+function changePlayer() {
+if (currentPlayer == 1) {
+			currentPlayer = 2; 
+	}  else {
+			currentPlayer = 1; 
+	}
+}
 //loop below that keeps going til player 1 OR 2
 //has 0 lives yet.
 // 0 -> 1 
@@ -14,33 +22,36 @@ function getRandom( max ) {
 
 while( (player1Lives > 0) && (player2Lives > 0) )
 {
-	var operator		  = getRandom(3); // 0, 1 , 2;
-	var value1 	 			= getRandom(20);
-	var value2   			= getRandom(20); 
-	var correctAnswer, userAnswer; 
+	var operator		  = Math.floor(Math.random() *  3); // 0, 1 , 2;
+	var value1 	 			= Math.floor(Math.random() * 20);
+	var value2   			= Math.floor(Math.random() * 20); 
+	var correctAnswer, userAnswer;
+	 
 
 	if (operator == ADD) {
-		(correctAnswer = (value1 + value2) )
+		(correctAnswer = (value1 + value2) );
+	}	else if (operator == SUB) {
+		(correctAnswer = (value1 - value2) );
+	} else {
+		(correctAnswer = (value1 * value2) );
 	} 
-	else if (operator == SUB) {
-		(correctAnswer = (value1 - value2) )
-	} 
-	else (operator == MUL) {
-		(correctAnswer = (value1 * value2) )
-	} 
-	userAnswer = prompt("What's the answer to this Q?"); 
+
+	userAnswer = prompt("Player " + ": " + "What is " + value1 + " " + operator + " " + value2 + "?" ); 
 
 	if (userAnswer == correctAnswer) { 
-		alert("You're totally right dude!")
+		alert("You're totally right dude! ");
 	}
 	else {
-		alert("You're wrong...and dumb.")
-	}
+		if (currentPlayer == 1) {
+			player1Lives--;
+		}	else {
+			player2Lives--;
+		}
 
-	if (currentPlayer == 1) {
-		
+		alert("You're wrong...and dumb.");
 	}
-
- 
+	changePlayer(); 
+	break; 
 }
+
 	
