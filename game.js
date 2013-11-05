@@ -8,16 +8,34 @@ var MUL = 2;
 
 function changePlayer() {
 	if (currentPlayer == 1) {
-			currentPlayer = 2; 
-	}  else {
-			currentPlayer = 1; 
+		currentPlayer = 2; 
+	} else {
+		currentPlayer = 1; 
 	}
 }
-//loop below that keeps going til player 1 OR 2
-//has 0 lives yet.
-// 0 -> 1 
-function getRandom( max ) {
-	return ( max * Math.floor( Math.random() ) );
+
+// NOT USED FOR NOW
+// //loop below that keeps going til player 1 OR 2
+// //has 0 lives yet.
+// // 0 -> 1 
+// function getRandom( max ) {
+// 	return ( max * Math.floor( Math.random() ) );
+// }
+
+function validatePlayerAnswer(userAnswer, correctAnswer)  {
+	if (userAnswer == correctAnswer) {  
+		// correct scenario
+		alert("You're totally right dude! ");
+	} else { 
+		// incorrect scenario, reduce lives by 1 for the current player
+		if (currentPlayer == 1) {
+			player1Lives--;
+		} else {
+			player2Lives--;
+		}
+
+		alert("You're wrong...and dumb.");
+	}
 }
 
 while( (player1Lives > 0) && (player2Lives > 0) )
@@ -38,22 +56,19 @@ while( (player1Lives > 0) && (player2Lives > 0) )
 		operatorSymbol = 'x';
 	}
 	
-	userAnswer = prompt("Player " + ": " + "What is " + value1 + " " + operatorSymbol + " " + value2 + "?" ); 
+	// Eg: Player 1: What is 5 x 3?
+	userAnswer = prompt("Player " + currentPlayer + ": " + "What is " + value1 + " " + operatorSymbol + " " + value2 + "?" ); 
 
-	if (userAnswer == correctAnswer) { 
-		alert("You're totally right dude! ");
-	}
-	else {
-		if (currentPlayer == 1) {
-			player1Lives--;
-		}	else {
-			player2Lives--;
-		}
-
-		alert("You're wrong...and dumb.");
-	}
-	changePlayer(); 
-	break; 
+	validatePlayerAnswer(userAnswer, correctAnswer);
+	changePlayer();
+	// break; 
 }
 
+// alert('Game ended');
+
+if (player1Lives == 0) {
+	alert('Game Over: Player 2 Wins!');
+} else {
+	alert('Game Over: Player 1 Wins!');
+}
 	
